@@ -1,7 +1,7 @@
 import requests
 import time
 nurl = "https://api.telegram.org/bot"
-token = '421347401:AAEZMIsjJT3yOh-68r_TJ0FjdTQo8O177BM/'
+token = '<mah token>/'
 url = nurl + token
 send = 'sendMessage'
 get = 'getUpdates'

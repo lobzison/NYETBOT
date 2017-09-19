@@ -1,9 +1,6 @@
 import requests
 import random
 
-#421347401:AAEZMIsjJT3yOh-68r_TJ0FjdTQo8O177BM/
-
-
 class BotHandler:
 
     def __init__(self, token):

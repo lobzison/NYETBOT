@@ -1,45 +1,70 @@
 import requests
-import time
-nurl = "https://api.telegram.org/bot"
-token = '<mah token>/'
-url = nurl + token
-send = 'sendMessage'
-get = 'getUpdates'
-my_chat = 121143792
+import random
+
+class BotHandler:
+
+    def __init__(self, token):
+        self.token =  token
+        self.api_url = 'https://api.telegram.org/bot{}/'.format(token)
+
+    def send_message(self, chat, message):
+        """Send message to the chat."""""
+        method = 'sendMessage'
+        params = {"chat_id": chat, "text": message}
+        response = requests.post(self.api_url + method, params)
+        print(self.api_url + method, params)
+        return response
+
+    def get_updates(self, offset=None, timeout=30):
+        """Gets json of messages"""
+        method = 'getUpdates'
+        params = {'timeout': timeout, 'offset': offset}
+        response = requests.get(self.api_url + method, params)
+        url2 = self.api_url + method
+        print(response)
+        result_json = response.json()['result']
+        return result_json
+
+    def get_last_update(self):
+        """Gets last update"""
+        get_result = self.get_updates()
+
+        if len(get_result) > 0:
+            last_update = get_result[-1]
+        else:
+            last_update = get_result[len(get_result)]
+
+        return last_update
 
 
-def send_message(chat, message):
-    """Send message to the chat."""""
-    params = {"chat_id" : chat, "text": message}
-    response = requests.post(url + send, data=params)
-    print(url + send, params)
-    return response
-
-
-def get_updates_json(request):
-    """Gets json of messages"""
-    response = requests.get(request + get)
-    return response.json()
-
-
-def get_last_update(data):
-    results = data['result']
-    total_updates = len(results) - 1
-    return results[total_updates]
-
-
-def get_chat_id(update):
-    chat_id = update['message']['chat']['id']
-    return chat_id
+nahui_bot = BotHandler("421347401:AAEZMIsjJT3yOh-68r_TJ0FjdTQo8O177BM")
+nahuis = ['ПIШОВ НАХУЙ', 'ВIСОСI IЗ ЖОПI', 'ЕХАI НАХУI', 'AMIGO DEL SOSO',
+          'TVOY ROT NAOBOROT', 'SHA ATADET 30 SEK ATADET', 'KURWA JEBANA', 'ТЫ ЛОХ']
 
 
 def main():
-    last_update = get_last_update(get_updates_json(url))['update_id']
-    for x in range(1,1000): # replace with endless loop.
-        if last_update == get_last_update(get_updates_json(url))['update_id']:
-            send_message(get_chat_id(get_last_update(get_updates_json(url))),'PIZDEC LOSHARA')
-            last_update += 1
-        time.sleep(1)
+    new_offset = None
+    while True:
+        nahui_bot.get_updates(new_offset)
+        last_update = nahui_bot.get_last_update()
+
+        last_update_id = last_update['update_id']
+        last_chat_id = last_update['message']['chat']['id']
+        last_chat_text = last_update['message']['text']
+        last_chat_name = last_update['message']['chat']['first_name']
+
+        nahui_name = last_chat_name.upper().replace('И', 'I')
+        nahui = random.choice(nahuis)
+        nahui_text = last_chat_text.upper().replace('И', 'I')
+
+        nahui_message = nahui_name + ' ' + nahui + ' ' + nahui_text
+        nahui_bot.send_message(last_chat_id, nahui_message)
+
+        new_offset = last_update_id + 1
 
 
-main()
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit()

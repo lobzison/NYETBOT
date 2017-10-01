@@ -1,5 +1,6 @@
 import requests
 import random
+from yandex_translate import YandexTranslate
 
 #421347401:AAEZMIsjJT3yOh-68r_TJ0FjdTQo8O177BM/
 
@@ -7,8 +8,9 @@ import random
 class BotHandler:
 
     def __init__(self, token):
-        self.token =  token
+        self.token = token
         self.api_url = 'https://api.telegram.org/bot{}/'.format(token)
+        self.language = {"from": "ru", "to": "pl"}
 
     def send_message(self, chat, message):
         """Send message to the chat."""""
@@ -40,6 +42,13 @@ class BotHandler:
 
         return last_update
 
+    def change_language(self):
+        """Changes the language back and forth"""
+        lng_to = self.language["to"]
+        lng_from = self.language["from"]
+        self.language["to"] = lng_from
+        self.language["from"] = lng_to
+
 
 nahui_bot = BotHandler("421347401:AAEZMIsjJT3yOh-68r_TJ0FjdTQo8O177BM")
 nahuis = ['ПIШОВ НАХУЙ', 'ВIСОСI IЗ ЖОПI', 'ЕХАI НАХУI', 'AMIGO DEL SOSO',
@@ -48,6 +57,7 @@ nahuis = ['ПIШОВ НАХУЙ', 'ВIСОСI IЗ ЖОПI', 'ЕХАI НАХУI',
 
 def main():
     new_offset = None
+    translate = YandexTranslate('trnsl.1.1.20170919T102055Z.7f2a9a244baf350b.f0f9abb8803ad4a6301be24d6ad71ba11b310840')
     while True:
 
         nahui_bot.get_updates(new_offset)
@@ -58,17 +68,30 @@ def main():
             last_chat_id = last_update['message']['chat']['id']
 
             if 'message' not in last_update or 'text' not in last_update['message']:
-                nahui_bot.send_message(last_chat_id, 'TEMIK PIDORAS, KIDAYTE TOLKO TEXT')
+                nahui_bot.send_message(last_chat_id, 'PSHEK PSHEK PSHEK NE PONIMAY PISHI TEKST')
             else:
                 last_chat_text = last_update['message']['text']
-                last_chat_name = last_update['message']['chat']['first_name']
+                if last_chat_text.lower() == "/pshek":
+                    nahui_bot.change_language()
+                    l_message = nahui_bot.language
+                    nahui_bot.send_message(last_chat_id, 'NOW TRANSLATING %s' % l_message)
+                else:
+                    l_message = translate.translate(last_chat_text, '%s-%s' % (nahui_bot.language["from"], nahui_bot.language["to"] ))
+                    if l_message["code"] != 200 or l_message["text"] == []:
+                        l_answer = 'YA OBOSRALSA, SORYAN'
 
-                nahui_name = last_chat_name.upper().replace('И', 'I')
-                nahui = random.choice(nahuis)
-                nahui_text = last_chat_text.upper().replace('И', 'I')
+                    else:
+                        l_answer = l_message["text"]
+                    nahui_bot.send_message(last_chat_id, l_answer)
 
-                nahui_message = nahui_name + ' ' + nahui + ' ' + nahui_text
-                nahui_bot.send_message(last_chat_id, nahui_message)
+                #last_chat_name = last_update['message']['chat']['first_name']
+
+                #nahui_name = last_chat_name.upper().replace('И', 'I')
+                #nahui = random.choice(nahuis)
+                #nahui_text = last_chat_text.upper().replace('И', 'I')
+
+                #nahui_message = nahui_name + ' ' + nahui + ' ' + nahui_text
+                #nahui_bot.send_message(last_chat_id, nahui_message)
 
             new_offset = last_update_id + 1
 

@@ -51,9 +51,6 @@ class BotHandler:
 
 
 nahui_bot = BotHandler("421347401:AAEZMIsjJT3yOh-68r_TJ0FjdTQo8O177BM")
-nahuis = ['ПIШОВ НАХУЙ', 'ВIСОСI IЗ ЖОПI', 'ЕХАI НАХУI', 'AMIGO DEL SOSO',
-          'TVOY ROT NAOBOROT', 'SHA ATADET 30 SEK ATADET', 'KURWA JEBANA', 'ТЫ ЛОХ']
-
 
 def main():
     new_offset = None
@@ -83,15 +80,6 @@ def main():
                     else:
                         l_answer = l_message["text"]
                     nahui_bot.send_message(last_chat_id, l_answer)
-
-                #last_chat_name = last_update['message']['chat']['first_name']
-
-                #nahui_name = last_chat_name.upper().replace('И', 'I')
-                #nahui = random.choice(nahuis)
-                #nahui_text = last_chat_text.upper().replace('И', 'I')
-
-                #nahui_message = nahui_name + ' ' + nahui + ' ' + nahui_text
-                #nahui_bot.send_message(last_chat_id, nahui_message)
 
             new_offset = last_update_id + 1
 

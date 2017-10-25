@@ -1,8 +1,5 @@
 import requests
-import random
 from yandex_translate import YandexTranslate
-
-#421347401:AAEZMIsjJT3yOh-68r_TJ0FjdTQo8O177BM/
 
 
 class BotHandler:
@@ -23,11 +20,7 @@ class BotHandler:
         """Gets json of messages"""
         method = 'getUpdates'
         params = {'timeout': timeout, 'offset': offset}
-        print('send long pool')
         response = requests.get(self.api_url + method, params)
-        print(' long pool ended')
-        print(response.json())
-        url2 = self.api_url + method
         result_json = response.json()['result']
         return result_json
 
@@ -50,36 +43,37 @@ class BotHandler:
         self.language["from"] = lng_to
 
 
-nahui_bot = BotHandler("421347401:AAEZMIsjJT3yOh-68r_TJ0FjdTQo8O177BM")
+nyet_bot = BotHandler("421347401:AAEZMIsjJT3yOh-68r_TJ0FjdTQo8O177BM")
+
 
 def main():
     new_offset = None
     translate = YandexTranslate('trnsl.1.1.20170919T102055Z.7f2a9a244baf350b.f0f9abb8803ad4a6301be24d6ad71ba11b310840')
     while True:
 
-        nahui_bot.get_updates(new_offset)
-        last_update = nahui_bot.get_last_update()
+        nyet_bot.get_updates(new_offset)
+        last_update = nyet_bot.get_last_update()
 
         if last_update != []:
             last_update_id = last_update['update_id']
             last_chat_id = last_update['message']['chat']['id']
 
             if 'message' not in last_update or 'text' not in last_update['message']:
-                nahui_bot.send_message(last_chat_id, 'PSHEK PSHEK PSHEK NE PONIMAY PISHI TEKST')
+                nyet_bot.send_message(last_chat_id, 'PSHEK PSHEK PSHEK NE PONIMAY PISHI TEKST')
             else:
                 last_chat_text = last_update['message']['text']
                 if last_chat_text.lower() == "/pshek":
-                    nahui_bot.change_language()
-                    l_message = nahui_bot.language
-                    nahui_bot.send_message(last_chat_id, 'NOW TRANSLATING %s' % l_message)
+                    nyet_bot.change_language()
+                    l_message = nyet_bot.language
+                    nyet_bot.send_message(last_chat_id, 'NOW TRANSLATING %s' % l_message)
                 else:
-                    l_message = translate.translate(last_chat_text, '%s-%s' % (nahui_bot.language["from"], nahui_bot.language["to"] ))
+                    l_message = translate.translate(last_chat_text, '%s-%s' % (nyet_bot.language["from"], nyet_bot.language["to"] ))
                     if l_message["code"] != 200 or l_message["text"] == []:
                         l_answer = 'YA OBOSRALSA, SORYAN'
 
                     else:
                         l_answer = l_message["text"]
-                    nahui_bot.send_message(last_chat_id, l_answer)
+                    nyet_bot.send_message(last_chat_id, l_answer)
 
             new_offset = last_update_id + 1
 

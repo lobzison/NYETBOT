@@ -1,1 +1,1 @@
-bot: python core.py
+bot: python src/core.py

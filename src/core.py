@@ -8,7 +8,7 @@ nyet_bot = BotHandler.BotHandler(keys.BOT_KEY, keys.TRANSLATE_KEY)
 def main():
     while True:
         updates = nyet_bot.get_updates()
-        nyet_bot.handle_updates(upates)
+        nyet_bot.handle_updates(updates)
 
 
 if __name__ == '__main__':

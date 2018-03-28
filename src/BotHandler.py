@@ -79,9 +79,8 @@ class BotHandler:
         """Checks if text contains commans
         If yes - returns first, if no - returns None"""
         for command in self.commands:
-            e_command = '/' + command
-            if e_command in text:
-                return e_command
+            if '/' + command == text:
+                return command
 
     #/ getters
 
@@ -89,12 +88,17 @@ class BotHandler:
         """Retuns message part of update, 
         sets offset to the update_id of message"""
         self.set_offset(update['update_id'])
-        return update['message']
+        if 'message' in update:
+            return update['message']
+        elif 'edited_message' in update:
+            return update['edited_message']
+        else:
+            return []
 
     def execute_command(self, command, chat_id):
         """Executes appropriate action for a command"""
         if command == self.commands[0]:
-            self.change_language
+            self.change_language()
             response = "Now translating from {} to {}".format(
                 self.language["from"].upper(),
                 self.language["to"].upper())
@@ -103,11 +107,11 @@ class BotHandler:
 #   main part
 
     def handle_updates(self, updates):
-        """Hanles the update set and responces accordingly"""
+        """Hanles the update set and responses accordingly"""
         # print(updates)
         if not updates:
             pass
-        for update in updates[-10:]:
+        for update in updates[-1:]:
             print(update)
             message = self.strip_update(update)
             typ = self.get_msg_type(message)
@@ -120,3 +124,4 @@ class BotHandler:
                 else:
                     response = self.get_response(text)
                     self.send_message(meta[0], response)
+            self.set_offset(self.offset + 1)

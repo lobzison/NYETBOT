@@ -1,8 +1,8 @@
 import keys
-import BotHandler
+import bothandler
 
 
-nyet_bot = BotHandler.BotHandler(keys.BOT_KEY, keys.TRANSLATE_KEY)
+nyet_bot = bothandler.PshekBot(keys.BOT_KEY, keys.TRANSLATE_KEY)
 
 
 def main():

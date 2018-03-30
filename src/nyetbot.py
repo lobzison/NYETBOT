@@ -82,7 +82,7 @@ class NyetBot(bothandler.BotHandler):
         self.user_memes.pop(meta['user_id'], None)
         self.users_waiting_add.remove(meta['user_id'])
         self.send_message(
-                    meta['chat_id'], 'Succesfully seted up new meme', meta['message_id'])
+                    meta['chat_id'], 'Succesfully set up new meme', meta['message_id'])
 
     def get_response(self, message, typ, meta):
         """Send accroding action"""

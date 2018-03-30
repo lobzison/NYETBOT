@@ -12,10 +12,18 @@ class BotHandler(object):
         self.api_url = 'https://api.telegram.org/bot{}/'.format(token)
 
     # API part
-    def send_message(self, chat, message):
+    def send_message(self, chat, message, reply_id = None):
         """Send message to the chat."""""
         method = 'sendMessage'
-        params = {"chat_id": chat, "text": message}
+        params = {"chat_id": chat, "text": message, "reply_to_message_id": reply_id}
+        response = requests.post(self.api_url + method, params)
+        return response
+
+    def send_photo(self, chat, photo_id, reply_id=None):
+        """Send photo to the chat."""""
+        method = 'sendPhoto'
+        params = {"chat_id": chat, "photo": photo_id,
+                  "reply_to_message_id": reply_id}
         response = requests.post(self.api_url + method, params)
         return response
 
@@ -35,8 +43,13 @@ class BotHandler(object):
     # getters
     def get_text(self, message):
         """Gets text part of message"""
-        print(message)
-        return message['text']
+        if 'text' in message:
+            return message['text']
+
+    def get_photo_id(self, message):
+        """Gets text part of message"""
+        if 'photo' in message:
+            return message['photo'][0]["file_id"]
 
     def get_msg_type(self, message):
         """Returns type of message"""
@@ -46,22 +59,22 @@ class BotHandler(object):
 
     def get_meta(self, message):
         """Returns metadata of message"""
-        meta = []
-        chat_id = message['chat']['id']
-        meta.append(chat_id)
+        meta = {}
+        meta['chat_id'] = message['chat']['id']
+        meta['message_id'] = message['message_id']
+        meta['user_id'] = message['from']['id']
         return meta
 
-    def get_response(self, text):
+    def get_response(self, message, typ, meta):
         """Responce for a text. Should be owerritter in child if you want to get any response"""
         return None
 
-    def get_command(self, text):
+    def get_command(self, message, typ, meta):
         """Checks if text contains commans
         If yes - returns first, if no - returns None"""
-        print(text)
-        words = text.split()
-        for command in words:
-            print(command)
+        if typ == 'text':
+            text = self.get_text(message)
+            command = text.split('@', 1)[0]
             if command in self.commands.keys():
                 return command
 
@@ -85,16 +98,14 @@ class BotHandler(object):
         if not updates:
             pass
         for update in updates[-1:]:
-            # print(update)
             message = self.strip_update(update)
             typ = self.get_msg_type(message)
             if not typ:
                 pass
             meta = self.get_meta(message)
-            text = self.get_text(message)
-            command = self.get_command(text)
+            command = self.get_command(message, typ, meta)
             if command:
                 self.execute_command(command, meta)
             else:
-                response = self.get_response(text)
-                if response: self.send_message(meta[0], response)
+                response = self.get_response(message, typ, meta)
+                if response: self.send_message(meta['chat_id'], response)

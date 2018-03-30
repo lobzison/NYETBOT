@@ -12,7 +12,7 @@ class PshekBot(bothandler.BotHandler):
 
     def change_language(self, meta):
         """Changes the language back and forth"""
-        chat_id = meta[0]
+        chat_id = meta['chat_id']
         lng_to = self.language["to"]
         lng_from = self.language["from"]
         self.language["to"] = lng_from
@@ -29,6 +29,8 @@ class PshekBot(bothandler.BotHandler):
             text, '{}-{}'.format(self.language["from"], self.language["to"]))
         return text["text"]
 
-    def get_response(self, text):
+    def get_response(self, message, typ, meta):
         """Response for a text. Should be owerritter in child if you want to get any response"""
-        return self.get_translation(text)
+        if typ == 'text':
+            text = self.get_text(message)
+            return self.get_translation(text)

@@ -3,7 +3,6 @@ import os
 import random
 import bothandler
 
-
 class NyetBot(bothandler.BotHandler):
     """Parse all messages, posm memes, save memes, random fuck you"""
 
@@ -12,7 +11,7 @@ class NyetBot(bothandler.BotHandler):
         self.commands = {'/add_meme': self.add_meme,
                          '/del_meme': self.del_meme,
                          '/show_memes': self.show_memes}
-        self.memes_file = "dicpics.json"
+        self.memes_file = r".\src\dicpics.json"
         self.average_message_per_fuck = 300
         self.fucks = ['pishov nahui']
         with open(self.memes_file) as f:

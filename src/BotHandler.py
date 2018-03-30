@@ -27,18 +27,15 @@ class BotHandler(object):
         result_json = response.json()['result']
         return result_json
 
-    # /API part
-
     # setters
     def set_offset(self, offset):
         """Setter for offset"""
         self.offset = offset
 
-    #/ setters
-
     # getters
     def get_text(self, message):
         """Gets text part of message"""
+        print(message)
         return message['text']
 
     def get_msg_type(self, message):
@@ -68,8 +65,6 @@ class BotHandler(object):
             if command in self.commands.keys():
                 return command
 
-    #/ getters
-
     def strip_update(self, update):
         """Retuns message part of update, 
         sets offset to the update_id of message + 1"""
@@ -79,9 +74,9 @@ class BotHandler(object):
                 return update[message_type]
         return []
 
-    def execute_command(self, command, chat_id):
+    def execute_command(self, command, meta):
         """Executes appropriate action for a command"""
-        self.commands[command](chat_id)
+        self.commands[command](meta)
 
 #   main part
 
@@ -99,7 +94,7 @@ class BotHandler(object):
             text = self.get_text(message)
             command = self.get_command(text)
             if command:
-                self.execute_command(command, meta[0])
+                self.execute_command(command, meta)
             else:
                 response = self.get_response(text)
                 if response: self.send_message(meta[0], response)

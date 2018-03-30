@@ -10,8 +10,9 @@ class PshekBot(bothandler.BotHandler):
         self.language = {"from": "ru", "to": "pl"}
         self.commands = {'/pshek': self.change_language}
 
-    def change_language(self, chat_id):
+    def change_language(self, meta):
         """Changes the language back and forth"""
+        chat_id = meta[0]
         lng_to = self.language["to"]
         lng_from = self.language["from"]
         self.language["to"] = lng_from

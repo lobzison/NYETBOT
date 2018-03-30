@@ -1,8 +1,8 @@
 import keys
-import pshekbot
+import nyetbot
 
 
-nyet_bot = pshekbot.PshekBot(keys.PSHEKBOT_KEY, keys.TRANSLATE_KEY)
+nyet_bot = nyetbot.NyetBot(keys.NYETBOT_KEY)
 
 
 def main():

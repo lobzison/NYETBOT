@@ -11,7 +11,7 @@ class NyetBot(bothandler.BotHandler):
         self.commands = {'/add_meme': self.add_meme_init,
                          '/del_meme': self.del_meme_init,
                          '/show_memes': self.show_memes}
-        self.memes_file = r".\src\dicpics.json"
+        self.memes_file = r".\src\bot\resources\dicpics.json"
         self.average_message_per_fuck = 300
         self.fucks = ['pishov nahui', 'ssaniy loh', 'eto nepravda', 'dvachuiu', 'yr mom gay', 'nyet ty']
         with open(self.memes_file) as f:
@@ -94,7 +94,7 @@ class NyetBot(bothandler.BotHandler):
         if user_id in self.users_waiting_add:
             if not self.user_memes[user_id]['meme_name']:
                 text = self.get_text(message)
-                name = text.split(' ', 1)[0]
+                name = text.rstrip().lstrip()
                 self.add_meme_name(meta, name)
             elif not self.user_memes[user_id]['meme_pic']:
                 photo_id = self.get_photo_id(message)

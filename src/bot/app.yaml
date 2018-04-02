@@ -1,8 +1,6 @@
-service: nyetlaunch
-runtime: python27
-api_version: 1
-threadsafe: true
+runtime: python
+env: flex
+entrypoint: nyetlauch.py
 
-handlers:
-- url: /.*
-  script: nyetlaunch.app
+runtime_config:
+  python_version: 2.7

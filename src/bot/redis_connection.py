@@ -24,6 +24,3 @@ def get_value(key):
 def delete(key):
     """Deletes value by key"""
     r.delete(key)
-
-
-print get_all_values()

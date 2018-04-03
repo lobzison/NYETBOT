@@ -1,4 +1,4 @@
-import keys
+# import keys
 import os
 import nyetbot
 

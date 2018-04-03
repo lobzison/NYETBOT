@@ -1,1 +1,1 @@
-bot: python src/core.py
+bot: python ./src/bot/nyetlaunch.py

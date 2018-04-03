@@ -1,0 +1,628 @@
+{
+    "ok": true,
+    "result": [
+        {
+            "update_id": 499890361,
+            "message": {
+                "message_id": 600,
+                "from": {
+                    "id": 21564513,
+                    "is_bot": false,
+                    "first_name": "Dee",
+                    "last_name": "Milezhik",
+                    "username": "Dee_Milezhik"
+                },
+                "chat": {
+                    "id": -13686685,
+                    "title": "NYET: трифорс и болд с утра пораньше",
+                    "type": "group",
+                    "all_members_are_administrators": true
+                },
+                "date": 1522535781,
+                "text": "Последняя - пушка"
+            }
+        },
+        {
+            "update_id": 499890362,
+            "message": {
+                "message_id": 601,
+                "from": {
+                    "id": 21564513,
+                    "is_bot": false,
+                    "first_name": "Dee",
+                    "last_name": "Milezhik",
+                    "username": "Dee_Milezhik"
+                },
+                "chat": {
+                    "id": -13686685,
+                    "title": "NYET: трифорс и болд с утра пораньше",
+                    "type": "group",
+                    "all_members_are_administrators": true
+                },
+                "date": 1522535792,
+                "text": "Даже последние две"
+            }
+        },
+        {
+            "update_id": 499890363,
+            "message": {
+                "message_id": 602,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535847,
+                "text": "Test message"
+            }
+        },
+        {
+            "update_id": 499890364,
+            "edited_message": {
+                "message_id": 602,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535847,
+                "edit_date": 1522535854,
+                "text": "Test edited message"
+            }
+        },
+        {
+            "update_id": 499890365,
+            "message": {
+                "message_id": 603,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535856,
+                "sticker": {
+                    "width": 512,
+                    "height": 186,
+                    "emoji": "😄",
+                    "set_name": "islamic2016",
+                    "thumb": {
+                        "file_id": "AAQEABOFIGIwAARPVSCURtnk-bUPAAIC",
+                        "file_size": 1884,
+                        "width": 128,
+                        "height": 46
+                    },
+                    "file_id": "CAADBAADTAIAAhfyygP7LvOlU6PqFwI",
+                    "file_size": 10306
+                }
+            }
+        },
+        {
+            "update_id": 499890366,
+            "message": {
+                "message_id": 604,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535864,
+                "voice": {
+                    "duration": 2,
+                    "mime_type": "audio/ogg",
+                    "file_id": "AwADAgADzgEAAq6yAAFKPXcimiP_L4QC",
+                    "file_size": 15098
+                }
+            }
+        },
+        {
+            "update_id": 499890367,
+            "message": {
+                "message_id": 605,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535873,
+                "text": "😌"
+            }
+        },
+        {
+            "update_id": 499890368,
+            "message": {
+                "message_id": 606,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535877,
+                "sticker": {
+                    "width": 512,
+                    "height": 512,
+                    "emoji": "🐷",
+                    "set_name": "GravityFallsUn1",
+                    "thumb": {
+                        "file_id": "AAQEABPVwGEwAAQhzjGr_i8S93sUAAIC",
+                        "file_size": 3570,
+                        "width": 128,
+                        "height": 128
+                    },
+                    "file_id": "CAADBAAD9gADR2brAAECdZN-PX7NEwI",
+                    "file_size": 17848
+                }
+            }
+        },
+        {
+            "update_id": 499890369,
+            "message": {
+                "message_id": 607,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535880,
+                "document": {
+                    "file_name": "giphy.mp4",
+                    "mime_type": "video/mp4",
+                    "thumb": {
+                        "file_id": "AAQEABMn_fYZAAS-EP6LirscSv1tAAIC",
+                        "file_size": 3132,
+                        "width": 90,
+                        "height": 67
+                    },
+                    "file_id": "CgADBAADuq4AAiYaZAd3LM2BwwS2OQI",
+                    "file_size": 468422
+                }
+            }
+        },
+        {
+            "update_id": 499890370,
+            "message": {
+                "message_id": 608,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535886,
+                "document": {
+                    "file_name": "FilterBlade.filter",
+                    "mime_type": "text/plain",
+                    "file_id": "BQADAgAD0AEAAq6yAAFK3ehbQyMUp_0C",
+                    "file_size": 178023
+                }
+            }
+        },
+        {
+            "update_id": 499890371,
+            "message": {
+                "message_id": 609,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535892,
+                "photo": [
+                    {
+                        "file_id": "AgADAgADjq0xG66yAAFK7eJy7Xy9XQcHBpwOAARIMONtgUTNCpMdAwABAg",
+                        "file_size": 1909,
+                        "width": 90,
+                        "height": 87
+                    },
+                    {
+                        "file_id": "AgADAgADjq0xG66yAAFK7eJy7Xy9XQcHBpwOAARHf45D02qQMpQdAwABAg",
+                        "file_size": 16519,
+                        "width": 320,
+                        "height": 309
+                    },
+                    {
+                        "file_id": "AgADAgADjq0xG66yAAFK7eJy7Xy9XQcHBpwOAARQCiC1QwABykeVHQMAAQI",
+                        "file_size": 50217,
+                        "width": 785,
+                        "height": 757
+                    }
+                ]
+            }
+        },
+        {
+            "update_id": 499890372,
+            "message": {
+                "message_id": 610,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": 121143792,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "type": "private"
+                },
+                "date": 1522535897,
+                "document": {
+                    "file_name": "dgdlzqf.jpg",
+                    "mime_type": "image/jpeg",
+                    "thumb": {
+                        "file_id": "AAQCABPCg6sOAAQCXholj24zSxwbAAIC",
+                        "file_size": 3629,
+                        "width": 90,
+                        "height": 86
+                    },
+                    "file_id": "BQADAgAD0QEAAq6yAAFKx0QIh9F8kF4C",
+                    "file_size": 80942
+                }
+            }
+        },
+        {
+            "update_id": 499890373,
+            "message": {
+                "message_id": 611,
+                "from": {
+                    "id": 121143792,
+                    "is_bot": false,
+                    "first_name": "Gleb",
+                    "last_name": "Lobov",
+                    "username": "lobzison",
+                    "language_code": "en-US"
+                },
+                "chat": {
+                    "id": -13686685,
+                    "title": "NYET: трифорс и болд с утра пораньше",
+                    "type": "group",
+                    "all_members_are_administrators": true
+                },
+                "date": 1522536438,
+                "text": "https://thedailywtf.com/articles/The-Speedup-Loop",
+                "entities": [
+                    {
+                        "offset": 0,
+                        "length": 49,
+                        "type": "url"
+                    }
+                ]
+            }
+        },
+        {
+            "update_id": 499890374,
+            "message": {
+                "message_id": 612,
+                "from": {
+                    "id": 74743410,
+                    "is_bot": false,
+                    "first_name": "Andrey",
+                    "last_name": "Nikolaev",
+                    "username": "Torainodor"
+                },
+                "chat": {
+                    "id": -13686685,
+                    "title": "NYET: трифорс и болд с утра пораньше",
+                    "type": "group",
+                    "all_members_are_administrators": true
+                },
+                "date": 1522568060,
+                "reply_to_message": {
+                    "message_id": 611,
+                    "from": {
+                        "id": 121143792,
+                        "is_bot": false,
+                        "first_name": "Gleb",
+                        "last_name": "Lobov",
+                        "username": "lobzison",
+                        "language_code": "en-US"
+                    },
+                    "chat": {
+                        "id": -13686685,
+                        "title": "NYET: трифорс и болд с утра пораньше",
+                        "type": "group",
+                        "all_members_are_administrators": true
+                    },
+                    "date": 1522536438,
+                    "text": "https://thedailywtf.com/articles/The-Speedup-Loop",
+                    "entities": [
+                        {
+                            "offset": 0,
+                            "length": 49,
+                            "type": "url"
+                        }
+                    ]
+                },
+                "text": "I was genuinely immersed"
+            }
+        },
+        {
+            "update_id": 499890375,
+            "message": {
+                "message_id": 613,
+                "from": {
+                    "id": 74743410,
+                    "is_bot": false,
+                    "first_name": "Andrey",
+                    "last_name": "Nikolaev",
+                    "username": "Torainodor"
+                },
+                "chat": {
+                    "id": -13686685,
+                    "title": "NYET: трифорс и болд с утра пораньше",
+                    "type": "group",
+                    "all_members_are_administrators": true
+                },
+                "date": 1522568069,
+                "text": "Классная история"
+            }
+        },
+        {
+            "update_id": 499890376,
+            "message": {
+                "message_id": 614,
+                "from": {
+                    "id": 74743410,
+                    "is_bot": false,
+                    "first_name": "Andrey",
+                    "last_name": "Nikolaev",
+                    "username": "Torainodor"
+                },
+                "chat": {
+                    "id": -13686685,
+                    "title": "NYET: трифорс и болд с утра пораньше",
+                    "type": "group",
+                    "all_members_are_administrators": true
+                },
+                "date": 1522568692,
+                "forward_from_chat": {
+                    "id": -1001065273723,
+                    "title": "Ой, всё.",
+                    "username": "memesbar",
+                    "type": "channel"
+                },
+                "forward_from_message_id": 9320,
+                "forward_date": 1522561238,
+                "photo": [
+                    {
+                        "file_id": "AgADAgAD-6gxG0HgAAFKbogvzi2OhUt1ApwOAAQDZOdLSSvI8RUdAwABAg",
+                        "file_size": 3684,
+                        "width": 90,
+                        "height": 90
+                    },
+                    {
+                        "file_id": "AgADAgAD-6gxG0HgAAFKbogvzi2OhUt1ApwOAAQHECKjV_s-RxYdAwABAg",
+                        "file_size": 51607,
+                        "width": 320,
+                        "height": 320
+                    },
+                    {
+                        "file_id": "AgADAgAD-6gxG0HgAAFKbogvzi2OhUt1ApwOAAS8Kj6HElyR7xQdAwABAg",
+                        "file_size": 139705,
+                        "width": 700,
+                        "height": 700
+                    }
+                ]
+            }
+        },
+        {
+            "update_id": 499890377,
+            "message": {
+                "message_id": 615,
+                "from": {
+                    "id": 90312891,
+                    "is_bot": false,
+                    "first_name": "Haze",
+                    "username": "Hazz3"
+                },
+                "chat": {
+                    "id": -13686685,
+                    "title": "NYET: трифорс и болд с утра пораньше",
+                    "type": "group",
+                    "all_members_are_administrators": true
+                },
+                "date": 1522569487,
+                "reply_to_message": {
+                    "message_id": 614,
+                    "from": {
+                        "id": 74743410,
+                        "is_bot": false,
+                        "first_name": "Andrey",
+                        "last_name": "Nikolaev",
+                        "username": "Torainodor"
+                    },
+                    "chat": {
+                        "id": -13686685,
+                        "title": "NYET: трифорс и болд с утра пораньше",
+                        "type": "group",
+                        "all_members_are_administrators": true
+                    },
+                    "date": 1522568692,
+                    "forward_from_chat": {
+                        "id": -1001065273723,
+                        "title": "Ой, всё.",
+                        "username": "memesbar",
+                        "type": "channel"
+                    },
+                    "forward_from_message_id": 9320,
+                    "forward_date": 1522561238,
+                    "photo": [
+                        {
+                            "file_id": "AgADAgAD-6gxG0HgAAFKbogvzi2OhUt1ApwOAAQDZOdLSSvI8RUdAwABAg",
+                            "file_size": 3684,
+                            "width": 90,
+                            "height": 90
+                        },
+                        {
+                            "file_id": "AgADAgAD-6gxG0HgAAFKbogvzi2OhUt1ApwOAAQHECKjV_s-RxYdAwABAg",
+                            "file_size": 51607,
+                            "width": 320,
+                            "height": 320
+                        },
+                        {
+                            "file_id": "AgADAgAD-6gxG0HgAAFKbogvzi2OhUt1ApwOAAS8Kj6HElyR7xQdAwABAg",
+                            "file_size": 139705,
+                            "width": 700,
+                            "height": 700
+                        }
+                    ]
+                },
+                "text": "Шотопроебываю с этого вейва мемов"
+            }
+        },
+        {
+            "update_id": 499890378,
+            "message": {
+                "message_id": 616,
+                "from": {
+                    "id": 90312891,
+                    "is_bot": false,
+                    "first_name": "Haze",
+                    "username": "Hazz3"
+                },
+                "chat": {
+                    "id": -13686685,
+                    "title": "NYET: трифорс и болд с утра пораньше",
+                    "type": "group",
+                    "all_members_are_administrators": true
+                },
+                "date": 1522569498,
+                "text": "Какие то они немного альтернативные"
+            }
+        },
+        {
+            "update_id": 499890379,
+            "message": {
+                "message_id": 617,
+                "from": {
+                    "id": 21564513,
+                    "is_bot": false,
+                    "first_name": "Dee",
+                    "last_name": "Milezhik",
+                    "username": "Dee_Milezhik"
+                },
+                "chat": {
+                    "id": -13686685,
+                    "title": "NYET: трифорс и болд с утра пораньше",
+                    "type": "group",
+                    "all_members_are_administrators": true
+                },
+                "date": 1522573390,
+                "forward_from_chat": {
+                    "id": -1001117628569,
+                    "title": "Mash",
+                    "username": "breakingmash",
+                    "type": "channel"
+                },
+                "forward_from_message_id": 4868,
+                "forward_date": 1522559745,
+                "video": {
+                    "duration": 41,
+                    "width": 640,
+                    "height": 360,
+                    "mime_type": "video/mp4",
+                    "thumb": {
+                        "file_id": "AAQCABMshqsOAASag5dkFHAHmlQSAAIC",
+                        "file_size": 1377,
+                        "width": 90,
+                        "height": 51
+                    },
+                    "file_id": "BAADAgADxAADgAsISvQ7zI3Km2GLAg",
+                    "file_size": 5638887
+                },
+                "caption": "Кемеровский губернатор Аман Тулеев подал в отставку. Говорит, что не может дальше работать с таким грузом, всем сказал спасибо и ушел. (1 апреля ни при чем)"
+            }
+        }
+    ]
+}

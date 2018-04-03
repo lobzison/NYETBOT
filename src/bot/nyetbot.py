@@ -1,5 +1,5 @@
 import json
-import os
+import redis_connection
 import random
 import bothandler
 
@@ -11,11 +11,9 @@ class NyetBot(bothandler.BotHandler):
         self.commands = {'/add_meme': self.add_meme_init,
                          '/del_meme': self.del_meme_init,
                          '/show_memes': self.show_memes}
-        self.memes_file = r"./src/bot/resources/dicpics.json"
         self.average_message_per_fuck = 300
         self.fucks = ['pishov nahui', 'ssaniy loh', 'eto nepravda', 'dvachuiu', 'yr mom gay', 'nyet ty']
-        with open(self.memes_file) as f:
-            self.memes = json.load(f)
+        self.memes = redis_connection.get_all_values()
         self.users_waiting_add = set([])
         self.users_waiting_del = set([])
         self.user_memes = {}
@@ -26,24 +24,15 @@ class NyetBot(bothandler.BotHandler):
         """Setter for a meme object"""
         self.memes = memes
 
-    # TODO multiple names for same meme without generating same line again
     def add_meme_to_file(self, meme_name, pic_addres):
         """Adds meme with picture addres to file"""
-        with open(self.memes_file, "r") as f:
-            data = json.load(f)
-            data[meme_name] = pic_addres
-            self.set_memes(data)
-        with open(self.memes_file, "w") as f:
-            json.dump(data, f, indent=4, separators=(',', ': '))
+        self.memes[meme_name] = pic_addres
+        redis_connection.set_value(meme_name, pic_addres)
 
     def del_meme_from_file(self, meme_name):
         """Delete meme from frile"""
-        with open(self.memes_file, "r") as f:
-            data = json.load(f)
-            data.pop(meme_name, None)
-            self.set_memes(data)
-        with open(self.memes_file, "w") as f:
-            json.dump(data, f, indent=4, separators=(',', ': '))
+        self.memes.pop(meme_name, None)
+        redis_connection.delete(meme_name)
 
     def show_memes(self, meta):
         """Shows avalibale commands"""

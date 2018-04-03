@@ -97,7 +97,7 @@ class BotHandler(object):
         """Hanles the update set and responses accordingly"""
         if not updates:
             pass
-        for update in updates[:]:
+        for update in updates[-1:]:
             message = self.strip_update(update)
             typ = self.get_msg_type(message)
             if not typ:

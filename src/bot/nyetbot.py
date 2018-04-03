@@ -11,7 +11,7 @@ class NyetBot(bothandler.BotHandler):
         self.commands = {'/add_meme': self.add_meme_init,
                          '/del_meme': self.del_meme_init,
                          '/show_memes': self.show_memes}
-        self.memes_file = r".\src\bot\resources\dicpics.json"
+        self.memes_file = r"./src/bot/resources/dicpics.json"
         #
         cwd = os.getcwd()
         print(cwd)

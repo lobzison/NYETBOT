@@ -130,8 +130,3 @@ class NyetBot(bothandler.BotHandler):
         self.show_memes(meta)
         self.send_message(
             meta['chat_id'], 'Send the name of the meme to delete', meta['message_id'])
-
-
-    # TODO wrappers for add and delete funcs for user interactions
-    # TODO recieve and send pictures
-    # TODO add and delete in different thread

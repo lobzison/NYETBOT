@@ -76,6 +76,7 @@ class NyetBot(bothandler.BotHandler):
 
     def add_meme_final(self, meta, pic_adress):
         """Next text message from user will be name of the meme, and image is meme"""
+        # Check if picture
         self.user_memes[meta['user_id']]['meme_pic'] = pic_adress
         self.add_meme_to_file(self.user_memes[meta['user_id']]['meme_name'],
                               self.user_memes[meta['user_id']]['meme_pic'])
@@ -88,9 +89,6 @@ class NyetBot(bothandler.BotHandler):
         """Send accroding action"""
         self.random_fuck_you(meta)
         user_id = meta['user_id']
-        print("add list" + str(self.users_waiting_add))
-        print("del list" + str(self.users_waiting_del))
-        print(self.user_memes)
         if user_id in self.users_waiting_add:
             if not self.user_memes[user_id]['meme_name']:
                 text = self.get_text(message)

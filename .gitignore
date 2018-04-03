@@ -105,4 +105,4 @@ venv.bak/
 .vscode/
 
 #api keys
-/src/keys.py
+/src/bot/keys.py

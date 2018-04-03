@@ -29,11 +29,11 @@ class NyetBot(bothandler.BotHandler):
     # TODO multiple names for same meme without generating same line again
     def add_meme_to_file(self, meme_name, pic_addres):
         """Adds meme with picture addres to file"""
-        with open(self.memes_file, "r+b") as f:
+        with open(self.memes_file, "r") as f:
             data = json.load(f)
             data[meme_name] = pic_addres
             self.set_memes(data)
-            f.seek(0)  # need to work on windows
+        with open(self.memes_file, "w") as f:
             json.dump(data, f, indent=4, separators=(',', ': '))
 
     def del_meme_from_file(self, meme_name):
@@ -43,7 +43,6 @@ class NyetBot(bothandler.BotHandler):
             data.pop(meme_name, None)
             self.set_memes(data)
         with open(self.memes_file, "w") as f:
-            #f.seek(0)  # need to work on windows
             json.dump(data, f, indent=4, separators=(',', ': '))
 
     def show_memes(self, meta):

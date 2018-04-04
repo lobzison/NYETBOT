@@ -6,7 +6,8 @@ class Message(object):
     def __init__(self, message):
         """Class initializator"""
         self.message_body = message
-        self.message_types = set(['message', 'edited_message'])
+        self.message_types = ['text', 'sticker', 'photo', 'document','video', 'audio', 'voice',
+                               'video_note', 'contact', 'location', 'venue', 'game', 'invoice' ]
         self.message_type = self.get_type()
 
     def _get_body(self):
@@ -21,12 +22,28 @@ class Message(object):
 
     def get_sender_id(self):
         """Returns id of message sender"""
-        pass
+        return self._get_body()['from']['id']
 
-    def 
+    def get_text(self):
+        """Returns text of the message"""
+        return self._get_body().get('text')
 
+    def get_file_id(self):
+        """Returns id of file"""
+        typ = self.message_type
+        body = self._get_body()
+        if typ == 'photo':
+            return body['photo'][0]['file_id']
+        elif typ in ['sticker', 'photo', 'document','video', 'audio', 'voice',
+                    'video_note']:
+            return body[typ].get('file_id')
+
+    def get_chat_id(self):
+        """Return id of chat"""
+        return self._get_body()['chat']['id']
+
+    def get_message_id(self):
+        return self._get_body()['message_id']
     
-
-
-
-    
+    def get_entities(self):
+        return self._get_body().get('entities')

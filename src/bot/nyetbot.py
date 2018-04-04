@@ -60,7 +60,7 @@ class NyetBot(bothandler.BotHandler):
         """Next text message from user will be name of the meme, and image is meme"""
         self.user_memes[meta['user_id']]['meme_name'] = name
         self.send_message(
-            meta['chat_id'], 'Name setted to '+ name+ '\n Send a photo', meta['message_id'])
+            meta['chat_id'], 'Name set to '+ name+ '\nSend a photo', meta['message_id'])
 
     def add_meme_final(self, meta, pic_adress):
         """Next text message from user will be name of the meme, and image is meme"""

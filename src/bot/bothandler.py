@@ -78,13 +78,13 @@ class BotHandler(object):
 
     def get_function_for_sending(self, msg_type):
         """Sends file based on type"""
-        mapping = {'sticker': self.send_sticker,
-                   'photo': self.send_photo,
-                   'document': self.send_document,
-                   'video': self.send_video,
-                   'audio': self.send_audio,
-                   'voice': self.send_voice,
-                   'video_note': self.send_video_note}
+        mapping = {b'sticker': self.send_sticker,
+                   b'photo': self.send_photo,
+                   b'document': self.send_document,
+                   b'video': self.send_video,
+                   b'audio': self.send_audio,
+                   b'voice': self.send_voice,
+                   b'video_note': self.send_video_note}
         return mapping.get(msg_type)
 
 

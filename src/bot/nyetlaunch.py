@@ -1,9 +1,9 @@
-# import keys
+#import keys
 import os
 import nyetbot
 
 # uncomment for local run
-# bot_key = keys.NYETBOT_KEY
+# bot_key = keys.TEST_KEY
 bot_key = os.environ['NYETBOT_KEY']
 nyet_bot = nyetbot.NyetBot(bot_key)
 

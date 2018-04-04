@@ -35,9 +35,9 @@ class NyetBot(bothandler.BotHandler):
         redis_connection.delete(meme_name)
 
     def show_memes(self, meta):
-        """Shows avalibale commands"""
+        """Shows availbale commands"""
         chat_id = meta['chat_id']
-        memes_list = 'Avaliable memes:'
+        memes_list = 'Available memes:'
         for meme in self.memes.keys():
             memes_list += '\n' + meme
         self.send_message(chat_id, memes_list)

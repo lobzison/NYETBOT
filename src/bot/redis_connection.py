@@ -10,7 +10,8 @@ def get_all_values():
     """Returns all keys and values from redis as dictionary"""
     key_value = {}
     for key in r.scan_iter():
-       key_value[key.decode('utf-8')] = r.lrange(key,0, -1)
+       key_value[key.decode('utf-8')] = [r.lrange(key, 0,
+                                                  0).decode('utf-8'), r.lrange(key, 0, 1).decode('utf-8')]
     return key_value
 
 def set_value(key, value):

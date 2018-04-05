@@ -118,12 +118,12 @@ class NyetBot(bothandler.BotHandler):
             chat_id = message.get_chat_id()
             message_id = message.get_message_id()
             text = message.get_text()
-            words = text.split()
+            words = text.lower().split()
 
             for word in words:
-                if word.lower() in self.memes:
+                if word in self.memes:
                     print('meme detected')
-                    meme = self.memes[word]
+                    meme = self.memes.get(word)
                     func = self.get_function_for_sending(meme[1])
                     print(meme[1])
                     print(func is None)

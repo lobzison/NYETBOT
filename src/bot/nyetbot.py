@@ -20,12 +20,12 @@ class NyetBot(bothandler.BotHandler):
         self.user_meme_struct = {'meme_name': "", "meme_pic": ""}
         self.response_types = set(['text', 'photo'])
 
-    def add_meme_to_file(self, meme_name, meme_info):
+    def add_meme(self, meme_name, meme_info):
         """Adds meme with picture addres to file"""
         self.memes[meme_name] = meme_info
         redis_connection.set_value(meme_name, meme_info)
 
-    def del_meme_from_file(self, meme_name):
+    def del_meme(self, meme_name):
         """Delete meme from frile"""
         self.memes.pop(meme_name, None)
         redis_connection.delete(meme_name)
@@ -38,10 +38,8 @@ class NyetBot(bothandler.BotHandler):
             memes_list += '\n' + meme
         self.send_message(chat_id, memes_list)
 
-    def random_fuck_you(self, message):
+    def random_fuck_you(self, chat_id, message_id):
         """Randomly fuck-offs the user"""
-        chat_id = message.get_chat_id()
-        message_id = message.get_message_id()
         roll = random.randint(1, self.average_message_per_fuck)
         if roll == 1:
             fuck = random.choice(self.fucks)
@@ -57,25 +55,17 @@ class NyetBot(bothandler.BotHandler):
         self.user_memes[user_id]=  user_meme_struct
         self.send_message(chat_id, 'Send the name of the meme', message_id)
 
-    def add_meme_name(self, message, name):
-        user_id = message.get_sender_id()
-        chat_id = message.get_chat_id()
-        message_id = message.get_message_id()
+    def add_meme_name(self, user_id, chat_id, message_id, name):
         """Next text message from user will be name of the meme, and image is meme"""
         self.user_memes[user_id]['meme_name'] = name
         self.send_message(
             chat_id, 'Name set to '+ name+ '\nSend any media', message_id)
 
-    def add_meme_final(self, message, pic_adress):
+    def add_meme_pic(self, msg_type, user_id, chat_id, message_id, pic_adress):
         """Next text message from user will be name of the meme, and image is meme"""
-        # Check if picture
-        user_id = message.get_sender_id()
-        chat_id = message.get_chat_id()
-        message_id = message.get_message_id()
         self.user_memes[user_id]['meme_pic'] = pic_adress
-        typ = message.get_type()
-        self.add_meme_to_file(self.user_memes[user_id]['meme_name'],
-                              [self.user_memes[user_id]['meme_pic'], typ])
+        self.add_meme(self.user_memes[user_id]['meme_name'],
+                              [self.user_memes[user_id]['meme_pic'], msg_type])
         self.user_memes.pop(user_id, None)
         self.users_waiting_add.remove(user_id)
         self.send_message(
@@ -83,52 +73,49 @@ class NyetBot(bothandler.BotHandler):
 
     def get_response(self, message):
         """Send accroding action"""
-        self.random_fuck_you(message)
-        user_id = message.get_sender_id()
-        text = message.get_text()
-        if user_id in self.users_waiting_add:
-            if not self.user_memes[user_id]['meme_name']:
-                name = text.rstrip().lstrip().lower()
-                self.add_meme_name(message, name)
-            elif not self.user_memes[user_id]['meme_pic']:
-                photo_id = message.get_file_id()
-                if photo_id:
-                    self.add_meme_final(message, photo_id)
-        if user_id in self.users_waiting_del:
-            name = text.split(' ', 1)[0]
-            self.del_meme_final(message, name)
-
-        self.parse_for_meme(message)
-        
-    def del_meme_final(self, message, name):
-        """Final operations for meme deletion"""
+        # get all meta information about message
         user_id = message.get_sender_id()
         chat_id = message.get_chat_id()
         message_id = message.get_message_id()
+        text = message.get_text()
+        msg_type = message.get_type()
+        #process itself
+        self.random_fuck_you(chat_id, message_id)
+        if user_id in self.users_waiting_add:
+            if not self.user_memes[user_id]['meme_name']:
+                name = text.rstrip().lstrip().lower()
+                self.add_meme_name(user_id, chat_id, message_id, name)
+            elif not self.user_memes[user_id]['meme_pic']:
+                photo_id = message.get_file_id()
+                if photo_id:
+                    self.add_meme_pic(
+                        msg_type, user_id, chat_id, message_id, photo_id)
+        if user_id in self.users_waiting_del:
+            name = text.split(' ', 1)[0]
+            self.del_meme_final(user_id, chat_id, message_id, name)
+        if msg_type == 'text':
+            self.parse_for_meme(chat_id, message_id, text)
+        
+    def del_meme_final(self, user_id, chat_id, message_id, name):
+        """Final operations for meme deletion"""
         if name in self.memes:
-            self.del_meme_from_file(name)
+            self.del_meme(name)
         self.users_waiting_del.remove(user_id)
         self.send_message(
             chat_id, 'Meme deleted', message_id)
 
-    def parse_for_meme(self, message):
+    def parse_for_meme(self, chat_id, message_id, text):
         """Checks if text contains commans
         If yes - returns first, if no - returns None"""
-        if message.get_type() == 'text':
-            chat_id = message.get_chat_id()
-            message_id = message.get_message_id()
-            text = message.get_text()
-            words = text.lower().split()
-
-            for word in words:
-                if word in self.memes:
-                    print('meme detected')
-                    meme = self.memes.get(word)
-                    func = self.get_function_for_sending(meme[1])
-                    print(meme[1])
-                    print(func is None)
-                    if func is not None:
-                        func(chat_id, meme[0], message_id)
+        words = text.lower().split()
+        for word in words:
+            if word in self.memes:
+                meme = self.memes.get(word)
+                func = self.get_function_for_sending(meme[1])
+                print(meme[1])
+                print(func is None)
+                if func is not None:
+                    func(chat_id, meme[0], message_id)
 
     def del_meme_init(self, message):
         """Deletes the meme by name"""

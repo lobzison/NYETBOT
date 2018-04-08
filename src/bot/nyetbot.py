@@ -12,7 +12,8 @@ class NyetBot(BotHandler):
         super(NyetBot, self).__init__(token)
         self.commands = {'/add_meme': self.add_meme_init,
                          '/del_meme': self.del_meme_init,
-                         '/show_memes': self.show_memes}
+                         '/show_memes': self.show_memes,
+                         '/discard': self.discard}
         self.average_message_per_fuck = 300
         self.fucks = ['pishov nahui', 'ssaniy loh', 'eto nepravda', 'dvachuiu', 'yr mom gay', 'nyet ty']
         self.redis_connection = RedisConnection(connection_string)
@@ -97,15 +98,15 @@ class NyetBot(BotHandler):
                     self.add_meme_pic(
                         msg_type, user_id, chat_id, message_id, photo_id)
         elif user_id in self.users_waiting_del:
-            name = text.rstrip().lstrip().lower()
             self.del_meme_final(user_id, chat_id, message_id, name)
         elif msg_type == 'text':
             self.parse_for_meme(chat_id, message_id, text)
         
     def del_meme_final(self, user_id, chat_id, message_id, name):
         """Final operations for meme deletion"""
-        if name in self.memes:
-            self.del_meme(name)
+        l_name = name.rstrip().lstrip().lower()
+        if l_name in self.memes:
+            self.del_meme(l_name)
         self.users_waiting_del.remove(user_id)
         self.send_message(
             chat_id, 'Meme deleted', message_id)
@@ -130,3 +131,20 @@ class NyetBot(BotHandler):
         self.show_memes(message)
         self.send_message(
             chat_id, 'Send the name of the meme to delete', message_id)
+            
+    def discard(self, message):
+        user_id = message.get_sender_id()
+        chat_id = message.get_chat_id()
+        flag = False
+        if user_id in self.users_waiting_del:
+            self.users_waiting_del.discard(user_id)
+            flag = True
+        if user_id in self.users_waiting_add:
+            self.users_waiting_add.discard(user_id)
+            flag = True
+            self.user_memes.pop(user_id, False)
+        if flag:
+            self.send_message(
+            chat_id, 'Command discarded')
+
+        

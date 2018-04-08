@@ -1,28 +1,31 @@
 # -*- coding: UTF-8  -*-
-import os
 import redis
-r = redis.from_url(os.environ.get("REDIS_URL"))
+import json
 
-#r = redis.from_url(
-#     "redis://h:pb0a1e45ad71a25e3604d6f1f3837618c11cdc9b6e70ca9dcbbbe437b1333ba38@ec2-54-172-241-93.compute-1.amazonaws.com:7109")
+class RedisConnection(object):
 
-def get_all_values():
-    """Returns all keys and values from redis as dictionary"""
-    key_value = {}
-    for key in r.scan_iter():
-        values = r.lrange(key, 0,-1)
-        key_value[key.decode(
-            'utf-8')] = [values[0].decode('utf-8'), values[1].decode('utf-8')]
-    return key_value
+    def __init__(self, connection_string):
+        self.connection_string = connection_string
+        self.connection = redis.from_url(self.connection_string)
 
-def set_value(key, value):
-    """Sets the value of key to value"""
-    r.rpush(key, *value)
+    def set_value(self, key, value):
+        """Sets the value of key to value"""
+        self.connection.set(key, value)
 
-def get_value(key):
-    """Gets value of a key"""
-    return r.lrange(key,0, -1)
+    def get_value(self, key):
+        """Gets value of a key"""
+        return self.connection.get(key)
 
-def delete(key):
-    """Deletes value by key"""
-    r.delete(key)
+    def delete(self, key):
+        """Deletes value by key"""
+        self.connection.delete(key)
+
+    def get_all_memes(self):
+        """Returns all keys and values from redis as dictionary"""
+        str_memes = self.get_value('memes')
+        return json.loads(str_memes)
+
+    def set_all_memes(self, value):
+        """Sets memes to new value"""
+        str_memes = json.dumps(value)
+        self.set_value('memes', str_memes)

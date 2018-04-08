@@ -1,9 +1,11 @@
-import json
-import redis_connection
+from redis_connection import RedisConnection
+from bothandler import BotHandler
 import random
-import bothandler
+import os
 
-class NyetBot(bothandler.BotHandler):
+connection_string = os.environ.get("REDIS_URL")
+
+class NyetBot(BotHandler):
     """Parse all messages, posm memes, save memes, random fuck you"""
 
     def __init__(self, token):
@@ -13,22 +15,24 @@ class NyetBot(bothandler.BotHandler):
                          '/show_memes': self.show_memes}
         self.average_message_per_fuck = 300
         self.fucks = ['pishov nahui', 'ssaniy loh', 'eto nepravda', 'dvachuiu', 'yr mom gay', 'nyet ty']
-        self.memes = redis_connection.get_all_values()
+        self.redis_connection = RedisConnection(connection_string)
+        self.memes = self.redis_connection.get_all_memes()
         self.users_waiting_add = set([])
         self.users_waiting_del = set([])
         self.user_memes = {}
-        self.user_meme_struct = {'meme_name': "", "meme_pic": ""}
+        self.user_meme_struct = {'meme_name': None, "meme_pic": None}
+        self.meme_meta_struct = {'type': None, "adress": None}
         self.response_types = set(['text', 'photo'])
 
     def add_meme(self, meme_name, meme_info):
         """Adds meme with picture addres to file"""
         self.memes[meme_name] = meme_info
-        redis_connection.set_value(meme_name, meme_info)
+        self.redis_connection.set_all_memes(self.memes)
 
     def del_meme(self, meme_name):
         """Delete meme from frile"""
         self.memes.pop(meme_name, None)
-        redis_connection.delete(meme_name)
+        self.redis_connection.set_all_memes(self.memes)
 
     def show_memes(self, message):
         """Shows availbale commands"""
@@ -64,8 +68,10 @@ class NyetBot(bothandler.BotHandler):
     def add_meme_pic(self, msg_type, user_id, chat_id, message_id, pic_adress):
         """Next text message from user will be name of the meme, and image is meme"""
         self.user_memes[user_id]['meme_pic'] = pic_adress
-        self.add_meme(self.user_memes[user_id]['meme_name'],
-                              [self.user_memes[user_id]['meme_pic'], msg_type])
+        meme_meta = self.meme_meta_struct.copy()
+        meme_meta['type'] = msg_type
+        meme_meta['adress'] = pic_adress
+        self.add_meme(self.user_memes[user_id]['meme_name'], meme_meta)
         self.user_memes.pop(user_id, None)
         self.users_waiting_add.remove(user_id)
         self.send_message(

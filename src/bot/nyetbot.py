@@ -18,7 +18,6 @@ class NyetBot(BotHandler):
         self.fucks = ['pishov nahui', 'ssaniy loh', 'eto nepravda', 'dvachuiu', 'yr mom gay', 'nyet ty']
         self.redis_connection = RedisConnection(connection_string)
         self.memes = self.redis_connection.get_all_memes()
-        self.users_waiting_add = set([])
         self.users_waiting_del = set([])
         self.user_memes = {}
         self.user_meme_struct = {'meme_name': None, "meme_pic": None}
@@ -55,7 +54,6 @@ class NyetBot(BotHandler):
         user_id = message.get_sender_id()
         chat_id = message.get_chat_id()
         message_id = message.get_message_id()
-        self.users_waiting_add.add(user_id)
         user_meme_struct = self.user_meme_struct.copy()
         self.user_memes[user_id]=  user_meme_struct
         self.send_message(chat_id, 'Send the name of the meme', message_id)
@@ -74,7 +72,6 @@ class NyetBot(BotHandler):
         meme_meta['adress'] = pic_adress
         self.add_meme(self.user_memes[user_id]['meme_name'], meme_meta)
         self.user_memes.pop(user_id, None)
-        self.users_waiting_add.remove(user_id)
         self.send_message(
                     chat_id, 'Succesfully set up new meme', message_id)
 
@@ -88,7 +85,7 @@ class NyetBot(BotHandler):
         msg_type = message.get_type()
         #process itself
         self.random_fuck_you(chat_id, message_id)
-        if user_id in self.users_waiting_add:
+        if user_id in self.user_memes:
             if not self.user_memes[user_id]['meme_name']:
                 name = text.rstrip().lstrip().lower()
                 self.add_meme_name(user_id, chat_id, message_id, name)
@@ -139,10 +136,9 @@ class NyetBot(BotHandler):
         if user_id in self.users_waiting_del:
             self.users_waiting_del.discard(user_id)
             flag = True
-        if user_id in self.users_waiting_add:
-            self.users_waiting_add.discard(user_id)
-            flag = True
+        if user_id in self.user_memes:
             self.user_memes.pop(user_id, False)
+            flag = True
         if flag:
             self.send_message(
             chat_id, 'Command discarded')

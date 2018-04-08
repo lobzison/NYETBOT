@@ -86,7 +86,7 @@ class NyetBot(BotHandler):
         #process itself
         self.random_fuck_you(chat_id, message_id)
         if user_id in self.user_memes:
-            if not self.user_memes[user_id]['meme_name']:
+            if not self.user_memes[user_id]['meme_name'] and msg_type == 'text':
                 name = text.rstrip().lstrip().lower()
                 self.add_meme_name(user_id, chat_id, message_id, name)
             elif not self.user_memes[user_id]['meme_pic']:

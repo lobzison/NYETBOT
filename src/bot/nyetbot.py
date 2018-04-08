@@ -117,11 +117,11 @@ class NyetBot(BotHandler):
         for word in words:
             if word in self.memes:
                 meme = self.memes.get(word)
-                func = self.get_function_for_sending(meme[1])
-                print(meme[1])
+                func = self.get_function_for_sending(meme['type'])
+                print(meme['type'])
                 print(func is None)
                 if func is not None:
-                    func(chat_id, meme[0], message_id)
+                    func(chat_id, meme['adress'], message_id)
 
     def del_meme_init(self, message):
         """Deletes the meme by name"""

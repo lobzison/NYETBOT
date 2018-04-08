@@ -86,7 +86,7 @@ class NyetBot(BotHandler):
         #process itself
         self.random_fuck_you(chat_id, message_id)
         if user_id in self.user_memes:
-            if not self.user_memes[user_id]['meme_name']:
+            if not self.user_memes[user_id]['meme_name'] and msg_type == 'text':
                 name = text.rstrip().lstrip().lower()
                 self.add_meme_name(user_id, chat_id, message_id, name)
             elif not self.user_memes[user_id]['meme_pic']:
@@ -94,7 +94,7 @@ class NyetBot(BotHandler):
                 if photo_id:
                     self.add_meme_pic(
                         msg_type, user_id, chat_id, message_id, photo_id)
-        elif user_id in self.users_waiting_del:
+        elif user_id in self.users_waiting_del and msg_type == 'text':
             name = text.rstrip().lstrip().lower()
             self.del_meme_final(user_id, chat_id, message_id, name)
         elif msg_type == 'text':

@@ -96,10 +96,10 @@ class NyetBot(BotHandler):
                 if photo_id:
                     self.add_meme_pic(
                         msg_type, user_id, chat_id, message_id, photo_id)
-        if user_id in self.users_waiting_del:
+        elif user_id in self.users_waiting_del:
             name = text.rstrip().lstrip().lower()
             self.del_meme_final(user_id, chat_id, message_id, name)
-        if msg_type == 'text':
+        elif msg_type == 'text':
             self.parse_for_meme(chat_id, message_id, text)
         
     def del_meme_final(self, user_id, chat_id, message_id, name):

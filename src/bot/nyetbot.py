@@ -132,6 +132,7 @@ class NyetBot(BotHandler):
             chat_id, 'Send the name of the meme to delete', message_id)
             
     def discard(self, message):
+        """Discards user from any waiting ques fror commands"""
         user_id = message.get_sender_id()
         chat_id = message.get_chat_id()
         flag = False

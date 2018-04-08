@@ -113,16 +113,12 @@ class NyetBot(BotHandler):
     def parse_for_meme(self, chat_id, message_id, text):
         """Checks if text contains commans
         If yes - returns first, if no - returns None"""
-        words = text.lower().split()
-        for word in words:
-            if word in self.memes:
-                meme = self.memes.get(word)
+        lower_text = text.lower()
+        for meme in self.memes:
+            if meme in lower_text:
+                meme = self.memes[meme]
                 func = self.get_function_for_sending(meme['type'])
-                print(meme['type'])
-                print(func is None)
                 if func is not None:
-                    print(func)
-                    print(meme)
                     func(chat_id, meme['adress'], message_id)
 
     def del_meme_init(self, message):

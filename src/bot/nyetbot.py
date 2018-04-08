@@ -121,6 +121,8 @@ class NyetBot(BotHandler):
                 print(meme['type'])
                 print(func is None)
                 if func is not None:
+                    print(func)
+                    print(meme)
                     func(chat_id, meme['adress'], message_id)
 
     def del_meme_init(self, message):

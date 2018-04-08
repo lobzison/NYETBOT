@@ -23,6 +23,7 @@ class RedisConnection(object):
     def get_all_memes(self):
         """Returns all keys and values from redis as dictionary"""
         str_memes = self.get_value('memes')
+        print(type(str_memes))
         return json.loads(str_memes)
 
     def set_all_memes(self, value):

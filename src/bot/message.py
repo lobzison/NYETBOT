@@ -49,7 +49,9 @@ class Message(object):
         return self._get_body().get('entities')
 
     def get_reply_user(self):
-        return self._get_body().get('reply_to_message').get('from').get('id')
+        reply = self._get_body().get('reply_to_message')
+        if reply:
+            return reply.get('from').get('id')
 
     def get_user_id(self):
         return self._get_body().get('from').get('id')

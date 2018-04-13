@@ -100,6 +100,7 @@ class NyetBot(BotHandler):
             self.del_meme_final(user_id, chat_id, message_id, name)
         elif msg_type == 'text':
             self.parse_for_meme(chat_id, message_id, text)
+            self.autofellation(message, chat_id, message_id)
         
     def del_meme_final(self, user_id, chat_id, message_id, name):
         """Final operations for meme deletion"""
@@ -146,4 +147,11 @@ class NyetBot(BotHandler):
             self.send_message(
             chat_id, 'Command discarded')
 
+    def autofellation(self, message, chat_id, message_id):
+        """If user replies to himself - send a meme"""
+        if message.get_user_id() == message.get_reply_user():
+            meme_meta = self.memes[u'автофелляция']
+            func = self.get_function_for_sending(meme_meta['type'])
+            if func is not None:
+                func(chat_id, meme_meta['adress'], message_id)
         

@@ -146,4 +146,11 @@ class NyetBot(BotHandler):
             self.send_message(
             chat_id, 'Command discarded')
 
+    def autofellation(self, message, chat_id, message_id):
+        """If user replies to himself - send a meme"""
+        if message.get_user_id() == message.get_reply_user_id():
+            meme_meta = self.memes[u'автофелляция']
+            func = self.get_function_for_sending(meme_meta['type'])
+            if func is not None:
+                func(chat_id, meme_meta['adress'], message_id)
         

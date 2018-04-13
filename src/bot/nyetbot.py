@@ -100,7 +100,7 @@ class NyetBot(BotHandler):
             self.del_meme_final(user_id, chat_id, message_id, name)
         elif msg_type == 'text':
             self.parse_for_meme(chat_id, message_id, text)
-        self.autofellation(message, chat_id, message_id)
+            self.autofellation(message, chat_id, message_id)
         
     def del_meme_final(self, user_id, chat_id, message_id, name):
         """Final operations for meme deletion"""

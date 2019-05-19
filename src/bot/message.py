@@ -24,7 +24,7 @@ class Message(object):
         """Returns id of message sender"""
         return self._get_body()['from']['id']
 
-    def get_text(self):
+    def get_text(self) -> str:
         """Returns text of the message"""
         return self._get_body().get('text')
 
@@ -46,7 +46,7 @@ class Message(object):
         return self._get_body()['message_id']
     
     def get_entities(self):
-        return self._get_body().get('entities')
+        return self._get_body().get('entities', [])
 
     def get_reply_user(self):
         reply = self._get_body().get('reply_to_message')
@@ -55,3 +55,15 @@ class Message(object):
 
     def get_user_id(self):
         return self._get_body().get('from').get('id')
+
+    def get_urls(self) -> [str]:
+        """ Returns list of urls from message"""
+        text = self.get_text()
+        entities = self.get_entities()
+        res = []
+        for entitiy in entities:
+            if entitiy['type'] == 'url':
+                begin = entitiy['offset']
+                end = begin + entitiy['length']
+                res.append(text[begin:end])
+        return res

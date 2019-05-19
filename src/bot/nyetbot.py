@@ -1,12 +1,13 @@
 from redis_connection import RedisConnection
 from bothandler import BotHandler
-import random
-import os
+from io import BytesIO
+from PIL import Image
+import random, os, requests, dhash
 
 connection_string = os.environ.get("REDIS_URL")
 
 class NyetBot(BotHandler):
-    """Parse all messages, posm memes, save memes, random fuck you"""
+    """Parse all messages, post  memes, save memes, random fuck you"""
 
     def __init__(self, token):
         super(NyetBot, self).__init__(token)
@@ -15,9 +16,13 @@ class NyetBot(BotHandler):
                          '/show_memes': self.show_memes,
                          '/discard': self.discard}
         self.average_message_per_fuck = 300
-        self.fucks = ['pishov nahui', 'ssaniy loh', 'eto nepravda', 'dvachuiu', 'yr mom gay', 'nyet ty']
+        self.fucks = ['pishov nahui', 'ssaniy loh', 'eto nepravda', 'dvachuiu', 'yr mom gay', 'nyet ty',
+                    'tvoy rot naoborot', 'eto pravda', 'on sharit', 'rolidoviy', 'kaka stelit vniz po noge, ege-ge']
+        self.repost_fucks = ["eto  je boyan, petushara", "REEEEEE \n POOOOOST", "ya eto uje videl, nesi novoe",
+                            "davay chto posvejee, valet", "boyan-huiyan"]
         self.redis_connection = RedisConnection(connection_string)
         self.memes = self.redis_connection.get_all_memes()
+        self.images = self.redis_connection.get_images_tree()
         self.users_waiting_del = set([])
         self.user_memes = {}
         self.user_meme_struct = {'meme_name': None, "meme_pic": None}
@@ -46,8 +51,7 @@ class NyetBot(BotHandler):
         """Randomly fuck-offs the user"""
         roll = random.randint(1, self.average_message_per_fuck)
         if roll == 1:
-            fuck = random.choice(self.fucks)
-            self.send_message(chat_id, fuck, message_id)
+            self.reply_with_random(chat_id, message_id, self.fucks)
 
     def add_meme_init(self, message):
         """Next text message from user will be name of the meme, and image is meme"""
@@ -101,6 +105,7 @@ class NyetBot(BotHandler):
         elif msg_type == 'text':
             self.parse_for_meme(chat_id, message_id, text)
             self.autofellation(message, chat_id, message_id)
+        self.prevent_duplicates(message, chat_id, message_id)
         
     def del_meme_final(self, user_id, chat_id, message_id, name):
         """Final operations for meme deletion"""
@@ -155,4 +160,35 @@ class NyetBot(BotHandler):
                 func = self.get_function_for_sending(meme_meta['type'])
                 if func is not None:
                     func(chat_id, meme_meta['adress'], message_id)
+
+    def is_image_duplicate(self, message):
+        """ Detects if the image was already posted in the chat"""
+        res = []
+        search_dist = 1
+        urls = filter(lambda x: 'png' in x or 'jpg' in x, message.get_urls()) 
+        for link in urls:
+            try:
+                response = requests.get(link)
+                bytes = BytesIO(response.content)
+                image = Image.open(bytes)
+                img_hash = dhash.dhash_int(image)
+                # dont really care what link from the message is repost
+                res = self.images.find(img_hash, search_dist)
+                self.images.add(img_hash)
+                self.redis_connection.set_images_tree(self.images)
+            except Exception as e:
+                print(e)
+        return len(res) > 0
+
+    def prevent_duplicates(self, message, chat_id, message_id):
+        if self.is_image_duplicate(message):
+            self.reply_with_random(chat_id, message_id, self.repost_fucks)
+
+    def reply_with_random(self, chat_id, message_id, replies):
+        """
+        Sends a reply message to message_id in chat_id 
+        with a random content taken from replies
+        """
+        text = random.choice(replies)
+        self.send_message(chat_id, text, message_id)
         

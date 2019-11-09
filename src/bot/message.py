@@ -1,4 +1,4 @@
-
+from typing import List
 class Message(object):
     """Class for storting and retriving
        telegram message information"""
@@ -56,7 +56,7 @@ class Message(object):
     def get_user_id(self):
         return self._get_body().get('from').get('id')
 
-    def get_urls(self) -> [str]:
+    def get_urls(self) -> List[str]:
         """ Returns list of urls from message"""
         text = self.get_text()
         entities = self.get_entities()

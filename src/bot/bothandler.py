@@ -93,6 +93,7 @@ class BotHandler(object):
         method = 'getUpdates'
         params = {'timeout': timeout, 'offset': self.offset}
         response = requests.get(self.api_url + method, params)
+        print(response)
         result_json = response.json()['result']
         return result_json
 

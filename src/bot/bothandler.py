@@ -137,12 +137,16 @@ class BotHandler(object):
             pass
         for update in updates:
             message_body = self.strip_update(update)
+            print(message_body)
             if not message_body:
+                print("GOVNO")
                 pass
             message = msg.Message(message_body)
+            print("ZALUPA", message)
             command = self.get_command(message)
             if command:
                 self.execute_command(command, message)
             else:
+                print("SIR", message)
                 response = self.get_response(message)
                 if response: self.send_message(message.get_chat_id(), response)

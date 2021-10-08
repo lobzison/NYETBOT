@@ -140,7 +140,7 @@ class BotHandler(object):
             print(message_body)
             if not message_body:
                 print("GOVNO")
-                pass
+                break
             message = msg.Message(message_body)
             print("ZALUPA", update)
             command = self.get_command(message)

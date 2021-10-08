@@ -137,10 +137,9 @@ class BotHandler(object):
             pass
         for update in updates:
             message_body = self.strip_update(update)
-            message = msg.Message(message_body)
-            typ = message.get_type()
-            if not typ:
+            if not message_body:
                 pass
+            message = msg.Message(message_body)
             command = self.get_command(message)
             if command:
                 self.execute_command(command, message)

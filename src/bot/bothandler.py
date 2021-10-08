@@ -118,6 +118,7 @@ class BotHandler(object):
     def strip_update(self, update):
         """Retuns message part of update, 
         sets offset to the update_id of message + 1"""
+        println(update)
         self.set_offset(update['update_id'] + 1)
         for message_type in self.message_types:
             if message_type in update:

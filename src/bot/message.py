@@ -22,6 +22,7 @@ class Message(object):
 
     def get_sender_id(self):
         """Returns id of message sender"""
+        print(self._get_body())
         return self._get_body()['from']['id']
 
     def get_text(self) -> str:

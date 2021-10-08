@@ -142,11 +142,11 @@ class BotHandler(object):
                 print("GOVNO")
                 pass
             message = msg.Message(message_body)
-            print("ZALUPA", message)
+            print("ZALUPA", update)
             command = self.get_command(message)
             if command:
                 self.execute_command(command, message)
             else:
-                print("SIR", message)
+                print("SIR", update)
                 response = self.get_response(message)
                 if response: self.send_message(message.get_chat_id(), response)

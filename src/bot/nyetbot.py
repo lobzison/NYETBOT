@@ -18,7 +18,7 @@ class NyetBot(BotHandler):
         self.average_message_per_fuck = 300
         self.fucks = ['pishov nahui', 'ssaniy loh', 'eto nepravda', 'dvachuiu', 'nyet ty',
                       'eto pravda', 'on sharit', 'rolidoviy', 'kaka stelit vniz po noge, ege-ge',
-                      'ok, boomer']
+                      'ok, boomer', 'nu tochno']
         self.repost_fucks = ["eto  je boyan, petushara", "REEEEEE \n POOOOOST", "ya eto uje videl, nesi novoe",
                             "davay chto posvejee, valet", "boyan-huiyan"]
         self.redis_connection = RedisConnection(connection_string)

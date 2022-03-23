@@ -16,9 +16,7 @@ class NyetBot(BotHandler):
                          '/show_memes': self.show_memes,
                          '/discard': self.discard}
         self.average_message_per_fuck = 300
-        self.fucks = ['pishov nahui', 'ssaniy loh', 'eto nepravda', 'dvachuiu', 'nyet ty',
-                      'eto pravda', 'on sharit', 'rolidoviy', 'kaka stelit vniz po noge, ege-ge',
-                      'ok, boomer', 'nu tochno']
+        self.fucks = ['slava Ukraine!', 'nu eto Zalupa uje', 'da', 'tak tochno', 'eto ne tak', 'infa 100', 'nyet', 'podderjivau vot etogo', 'puk puk', 'welcome to the club, buddy']
         self.repost_fucks = ["eto  je boyan, petushara", "REEEEEE \n POOOOOST", "ya eto uje videl, nesi novoe",
                             "davay chto posvejee, valet", "boyan-huiyan"]
         self.redis_connection = RedisConnection(connection_string)

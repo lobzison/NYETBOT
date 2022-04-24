@@ -5,6 +5,3 @@ BotHandler class in src/bot/bothandler module provides generic fuctionality of b
 
 ## Nyetbot
 Bot for chat groups. Have a random phrase function, adding and deleteing of memes. Memes are basicly some string associated with media. If the message containing the string is posted, the associated media is posted by bot.
-
-## Pshekbot
-Really simple bot. Just a wrapper for yandex.translate API.
